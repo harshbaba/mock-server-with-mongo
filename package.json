@@ -1,0 +1,14 @@
+{
+  "name": "hishaab-kitaab-backend",
+  "version": "1.0.0",
+  "main": "server.js",
+  "author": "Harsh Baba",
+  "license": "ISC",
+  "dependencies" : {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "jsonwebtoken": "^5.7.0",
+    "mongoose": "^4.4.5",
+    "morgan": "^1.7.0"
+  }
+}
