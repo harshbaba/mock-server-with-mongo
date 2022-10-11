@@ -178,7 +178,7 @@ module.exports = function(app) {
     app.post('/addTransaction', function(req, res){
         //console.log(req.body);
         var transaction = new Transactions({
-            paidBy              : req.body.paidby, //'633f1d88792d3d1aa3d12d2a',
+            paidBy              : req.body.paidBy, //'633f1d88792d3d1aa3d12d2a',
             amount              : req.body.amount,
             remarks             : req.body.remarks,
             trackerId           : req.body.trackerId,
