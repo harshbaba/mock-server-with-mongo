@@ -62,10 +62,6 @@ module.exports = function(app) {
             }
         });
 
-        
-
-        
-
     });
 
     //login user
@@ -175,8 +171,8 @@ module.exports = function(app) {
     })
 
     //for register a new transaction
-    app.post('/addTransaction', function(req, res){
-        //console.log(req.body);
+    app.post('/addTransaction', async function(req, res){
+        console.log(req.body);
         var transaction = new Transactions({
             paidBy              : req.body.paidBy, //'633f1d88792d3d1aa3d12d2a',
             amount              : req.body.amount,
@@ -201,6 +197,20 @@ module.exports = function(app) {
                 
             }
         });
+
+    });
+
+    //for update a transaction
+    //for register a new transaction
+    app.post('/updateTransaction', async function(req, res){
+        // save the transaction
+        Transactions.findOneAndUpdate(
+            {  _id:req.body.transactionId}, req.body, {new:true}
+        ).then((data)=>{
+            console.log('Transaction saved successfully');
+            res.json({ success: true, data:data, message: 'Transaction Update Successfully' });
+        })
+        
 
     });
 
