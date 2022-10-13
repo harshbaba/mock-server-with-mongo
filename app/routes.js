@@ -201,7 +201,6 @@ module.exports = function(app) {
     });
 
     //for update a transaction
-    //for register a new transaction
     app.post('/updateTransaction', async function(req, res){
         // save the transaction
         Transactions.findOneAndUpdate(
@@ -213,6 +212,7 @@ module.exports = function(app) {
         
 
     });
+    
 
      //get all transactions (Super admin Routes)
     app.get('/allTransactions', function(req, res){
@@ -272,6 +272,37 @@ module.exports = function(app) {
         });
         
     });
+
+    /*==================(Don't use these urls) Only for development =====*/
+    //for update a transaction
+    // app.get('/updateTracker', async function(req, res){
+    //     Tracker.findOneAndUpdate(
+    //         {  _id:'6341c71c98af556aeeb1b469'}, {transactions:[
+    //             '6347a795199f124dc3285e58',
+    //             '6347a810199f124dc3285e59',
+    //             '6347a830199f124dc3285e5a'
+    //         ]}, {new:true}
+    //     ).then((data)=>{
+    //         console.log('Transaction saved successfully');
+    //         res.json({ success: true, data:data, message: 'Transaction Update Successfully' });
+    //     })
+        
+
+    // });
+
+    // app.get('/updateUser', async function(req, res){
+    //     User.findOneAndUpdate(
+    //         {  _id:'6341af412b2bbb62f4c73a8a'}, {trackers:[
+    //             '6341c71c98af556aeeb1b469',
+    //             '6347b987ceb38674da3901f7'
+    //         ]}, {new:true}
+    //     ).then((data)=>{
+    //         console.log('Transaction saved successfully');
+    //         res.json({ success: true, data:data, message: 'Transaction Update Successfully' });
+    //     })
+        
+
+    // });
     
 };
 
