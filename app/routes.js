@@ -9,16 +9,16 @@ module.exports = function(app) {
     const Transactions          = require('./models/transaction'); // get our mongoose model
     const User                  = require('./models/user');
     const Tracker               = require('./models/tracker');
-    //var cors                    = require('cors');
+    var cors                    = require('cors');
 
     //cors request
-    app.use(function(req, res, next) {
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        next();
-    });
+    // app.use(function(req, res, next) {
+    //     res.header("Access-Control-Allow-Origin", "*");
+    //     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    //     next();
+    // });
 
-    //app.use(cors());
+    app.use(cors());
 
     
 
