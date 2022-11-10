@@ -56,7 +56,7 @@ module.exports = function(app) {
                     }
                     else{
                         console.log('New User Registered successfully');
-                        res.json({ success: true, message: 'Your account has registered successfully, please go to login page and do login in' });
+                        res.json({ success: true, message: 'Your account has registered successfully.' });
                     }
                 });
             }
@@ -109,14 +109,14 @@ module.exports = function(app) {
 
     //for register a new tracker
     app.post('/addTracker', function(req, res){
-        //console.log(req.body);
+        console.log(req.body);
         var tracker = new Tracker({
             trackerName             : req.body.trackerName,
             adminDetails            : req.body._id, //admin objectId
             members                 : [req.body._id]
         }); 
 
-        // save the tracker
+        //save the tracker
         tracker.save(function(err,data) {
             if (err){
                 res.json({success: false, message: err});
@@ -130,17 +130,27 @@ module.exports = function(app) {
                 })
             }
         });
-
     });
 
     //for adding a new member in a tracker
     app.post('/addMember', function(req, res){
-        //need member object Id
+        //need member emailId
         //need Tracker Object Id
-        console.log(req.body.memberId)
+        console.log(req.body.memberEmailId)
         console.log(req.body.trackerId);
-
-        Tracker.findOneAndUpdate(
+        User.findOneAndUpdate(
+            {  email: req.body.memberEmailId},
+            { $push: { trackers: req.body.trackerId } }
+        ).then((user)=>{
+            Tracker.findOneAndUpdate(
+                {  _id:req.body.trackerId},
+                { $push: { members: user._id } }
+            ).then((tracker)=>{
+                const data = {fullName: user.fullName, _id: user._id, email:user.email}
+                res.json({ success: true, data: data, message: 'New Member Added Successfully' });
+            })
+        })
+        /*Tracker.findOneAndUpdate(
             {  _id:req.body.trackerId},
             { $push: { members: req.body.memberId } }
         ).then(()=>{
@@ -152,6 +162,7 @@ module.exports = function(app) {
                 res.json({ success: true, data: data, message: 'New Member Added Successfully' });
             })
         })
+        */
 
     });
 
@@ -255,7 +266,7 @@ module.exports = function(app) {
 
     //delete a user
     app.delete('/deleteUser', function(req, res) {
-        console.log(req.body.userId);
+        console.log('Hi', req.body.userId);
         User.deleteOne({ _id: req.body.userId })
         .then((user)=>{
             res.send('User Deleted Successfully');
