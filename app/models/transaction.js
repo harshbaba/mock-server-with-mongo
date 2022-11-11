@@ -7,5 +7,7 @@ module.exports = mongoose.model('Transactions', new Schema({
     paidBy          : {type: 'ObjectId', ref:'User'},
     amount          : Number,
     remarks         : String,
-    trackerId       : String
+    trackerId       : String,
+    createdAt       : Date | String,
+    updatedAt       : Date | String
 }));

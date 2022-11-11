@@ -150,19 +150,6 @@ module.exports = function(app) {
                 res.json({ success: true, data: data, message: 'New Member Added Successfully' });
             })
         })
-        /*Tracker.findOneAndUpdate(
-            {  _id:req.body.trackerId},
-            { $push: { members: req.body.memberId } }
-        ).then(()=>{
-            User.findOneAndUpdate(
-                {  _id:req.body.memberId},
-                { $push: { trackers: req.body.trackerId } }
-            ).then((user)=>{
-                const data = {fullName: user.fullName, _id: user._id, email:user.email}
-                res.json({ success: true, data: data, message: 'New Member Added Successfully' });
-            })
-        })
-        */
 
     });
 
@@ -189,6 +176,8 @@ module.exports = function(app) {
             amount              : req.body.amount,
             remarks             : req.body.remarks,
             trackerId           : req.body.trackerId,
+            createdAt           : new Date(),
+            updatedAt           : ''
         }); 
 
         // save the transaction
